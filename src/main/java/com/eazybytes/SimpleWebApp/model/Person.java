@@ -30,7 +30,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 public class Person extends BaseEntity{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "person_id")
     private int Id;
 
     @NotBlank(message = "Name cannot be blank")

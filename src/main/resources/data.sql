@@ -21,3 +21,9 @@ VALUES ('Sep 5', 'Labor Day', 'FEDERAL', CURRENT_DATE, 'DBA');
 
 INSERT INTO holidays (day, reason, type, created_at, created_by)
 VALUES ('Nov 11', 'Veterans Day', 'FEDERAL', CURRENT_DATE, 'DBA');
+
+INSERT INTO roles (role_name, created_at, created_by)
+VALUES ('USER', NOW(), 'DBA');
+
+INSERT INTO roles (role_name, created_at, created_by)
+VALUES ('ADMIN', NOW(), 'DBA');

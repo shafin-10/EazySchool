@@ -20,26 +20,24 @@ public class LoginController {
     public String displayLoginPage(@RequestParam(value = "error", required = false) String error,
                                    @RequestParam(value = "logout", required = false) String logout,
                                    @RequestParam(value = "register", required = false) String register,
-                                   Model model){
+                                   Model model) {
+        String errorMessage = null;
+        if (error != null) {
+            errorMessage = "Username or Password is incorrect !!";
+        } else if (logout != null) {
+            errorMessage = "You have been successfully logged out !!";
+        } else if (register != null) {
+            errorMessage = "You registration successful. Login with registered credentials !!";
+        }
 
-        String errorMsg = null;
-        if(error != null){
-          errorMsg = "Username or password is incorrect";
-        }
-        else if(logout != null){
-            errorMsg= "You have been successfully logged out !!";
-        }
-        else if (register != null) {
-            errorMsg = "You registration successful. Login with registered credentials !!";
-        }
-        model.addAttribute("errorMessage", errorMsg);
-        return "login";
+        model.addAttribute("errorMessage", errorMessage);
+        return "login.html";
     }
 
-    @RequestMapping(value="/logout", method = RequestMethod.GET)
-    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null){
+        if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
         return "redirect:/login?logout=true";

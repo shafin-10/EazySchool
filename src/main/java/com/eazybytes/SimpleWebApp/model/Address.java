@@ -12,7 +12,7 @@ import org.apache.logging.log4j.message.Message;
 public class Address extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int addressId;
 
     @NotBlank(message = "Address line 1 cannot be blank")

@@ -44,8 +44,7 @@ public class contactController {
     @GetMapping("/displayMessages")
     public ModelAndView displayMessages(Model model){
         List<Contact> contactMsgs = contactService.findMsgsWithOpebStatus();
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("messages.html");
+        ModelAndView modelAndView = new ModelAndView("messages.html");
         modelAndView.addObject("contactMsgs", contactMsgs);
         return modelAndView;
 

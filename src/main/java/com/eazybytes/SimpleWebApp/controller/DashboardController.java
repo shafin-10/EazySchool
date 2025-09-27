@@ -1,6 +1,10 @@
 package com.eazybytes.SimpleWebApp.controller;
 
+import com.eazybytes.SimpleWebApp.model.Person;
+import com.eazybytes.SimpleWebApp.repository.PersonRepository;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -11,10 +15,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class DashboardController {
 
+    @Autowired
+    PersonRepository personRepository;
+
     @GetMapping("/dashboard")
-    public String getDashboard(Model model, Authentication authentication){
-        model.addAttribute("username", authentication.getName());
+    public String getDashboard(Model model, Authentication authentication, HttpSession session){
+        Person person = personRepository.readByEmail(authentication.getName());
+        model.addAttribute("username", person.getName());
         model.addAttribute("roles", authentication.getAuthorities().toString());
+        session.setAttribute("loggedInPerson", person);
         //throw  new RuntimeException("an error occureed");
         return "dashboard.html";
     }

@@ -61,3 +61,19 @@ CREATE TABLE IF NOT EXISTS person (
   FOREIGN KEY (role_id) REFERENCES roles(role_id),
   FOREIGN KEY (address_id) REFERENCES address(address_id)
 );
+
+CREATE TABLE IF NOT EXISTS class (
+    class_id SERIAL PRIMARY KEY,  -- SERIAL = auto-increment in PostgreSQL
+    name VARCHAR(100) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    created_by VARCHAR(50) NOT NULL,
+    updated_at TIMESTAMP DEFAULT NULL,
+    updated_by VARCHAR(50) DEFAULT NULL
+);
+
+ALTER TABLE person
+ADD COLUMN class_id INT NULL;
+
+ALTER TABLE person
+ADD CONSTRAINT fk_class_class_id
+FOREIGN KEY (class_id) REFERENCES class(class_id);

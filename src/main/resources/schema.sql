@@ -77,3 +77,23 @@ ADD COLUMN class_id INT NULL;
 ALTER TABLE person
 ADD CONSTRAINT fk_class_class_id
 FOREIGN KEY (class_id) REFERENCES class(class_id);
+
+CREATE TABLE IF NOT EXISTS courses (
+    course_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    fees VARCHAR(10) NOT NULL,
+    created_at TIMESTAMP NOT NULL,
+    created_by VARCHAR(50) NOT NULL,
+    updated_at TIMESTAMP DEFAULT NULL,
+    updated_by VARCHAR(50) DEFAULT NULL
+);
+
+CREATE TABLE IF NOT EXISTS person_courses (
+    person_id INT NOT NULL,
+    course_id INT NOT NULL,
+    PRIMARY KEY (person_id, course_id),
+    CONSTRAINT fk_person
+        FOREIGN KEY (person_id) REFERENCES person(person_id) ON DELETE CASCADE,
+    CONSTRAINT fk_course
+        FOREIGN KEY (course_id) REFERENCES courses(course_id) ON DELETE CASCADE
+);

@@ -70,9 +70,8 @@ Author URL: http://w3layouts.com
                         </div>
                     </a>
                 </div>
-                <div class="col-sm-6 col-lg-3"  sec:authorize="hasRole('ROLE_ADMIN')">
-                    <!-- sec:authorize="hasRole('ROLE_ADMIN')" -->
-                    <a th:href="@{/displayMessages}">
+                <div class="col-sm-6 col-lg-3" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a th:href="@{/displayMessages/page/1?sortField=name&sortDir=desc}">
                         <div class="overview-item overview-item--c3">
                             <div class="overview__inner">
                                 <div class="overview-box clearfix">
